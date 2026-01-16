@@ -3,6 +3,23 @@ import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
 import { getMockResponse } from "../../services/mockResponses";
 import Alert from "../ui/Alert";
+import { getPetAIResponse } from "../../services/chatService";
+
+const handleSend = async (input) => {
+  setMessages((prev) => [...prev, { sender: "user", text: input }]);
+
+  setLoading(true);
+
+  const reply = await getPetAIResponse({
+    petType,
+    ageGroup,
+    userInput: input,
+  });
+
+  setMessages((prev) => [...prev, { sender: "bot", text: reply }]);
+  setLoading(false);
+};
+
 
 const ChatContainer = ({ petType, ageGroup }) => {
   const [messages, setMessages] = useState([
