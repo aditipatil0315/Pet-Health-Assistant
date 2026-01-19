@@ -3,3 +3,18 @@
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
+
+:root {
+  --bg-primary: #F6E3C5;
+  --bg-secondary: #F3D6A3;
+
+  --accent-primary: #F2A65A;
+  --accent-secondary: #E28C3D;
+
+  --text-primary: #4A2E1F;
+  --text-secondary: #7A4A2E;
+
+  --border-light: #E8CFA8;
+
+  --shadow-soft: rgba(74, 46, 31, 0.15);
+}

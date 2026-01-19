@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
 export default async function runPetAI({
   petType,
   ageGroup,
   userInput,
 }) {
-  const systemPrompt = `
+  const prompt = `
 You are a pet health assistant.
 You only answer questions related to dog and cat health.
 You do NOT prescribe medication or dosage.
@@ -16,25 +16,26 @@ Use a calm, friendly, and reassuring tone.
 
 Pet Type: ${petType}
 Age Group: ${ageGroup}
+
+User Question:
+${userInput}
 `;
 
   const response = await axios.post(
-    "https://api.openai.com/v1/chat/completions",
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
     {
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userInput },
+      contents: [
+        {
+          parts: [{ text: prompt }],
+        },
       ],
-      temperature: 0.4,
     },
     {
       headers: {
-        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
     }
   );
 
-  return response.data.choices[0].message.content;
+  return response.data.candidates[0].content.parts[0].text;
 }

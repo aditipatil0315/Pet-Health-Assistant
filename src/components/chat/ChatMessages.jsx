@@ -1,15 +1,21 @@
 const ChatMessages = ({ messages }) => {
   return (
-    <div className="h-100 overflow-y-auto mb-4 space-y-3">
+    <div className="flex flex-col gap-3 overflow-y-auto pr-1">
       {messages.map((msg, index) => (
         <div
           key={index}
-          className={`max-w-[80%] px-4 py-2 rounded-xl text-sm
+          className={`
+            max-w-[85%] sm:max-w-[75%]
+            px-4 py-2.5
+            text-sm sm:text-base
+            leading-relaxed
+            rounded-2xl
             ${
               msg.sender === "user"
-                ? "ml-auto bg-blue-600"
-                : "bg-neutral-800"
-            }`}
+                ? "ml-auto bg-[var(--accent-primary)] text-white rounded-br-md"
+                : "bg-[var(--bg-secondary)] text-[var(--text-primary)] rounded-bl-md"
+            }
+          `}
         >
           {msg.text}
         </div>

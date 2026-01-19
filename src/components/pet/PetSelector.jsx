@@ -1,16 +1,26 @@
 const PetSelector = ({ petType, setPetType }) => {
   return (
-    <div className="flex justify-center gap-4 mb-8">
+    <div className="flex justify-center gap-3 sm:gap-4 mb-8">
       {["dog", "cat"].map((pet) => (
         <button
           key={pet}
           onClick={() => setPetType(pet)}
-          className={`px-6 py-3 rounded-xl border text-lg capitalize transition
+          className={`
+            px-5 sm:px-6
+            py-3
+            rounded-2xl
+            border
+            text-base sm:text-lg
+            font-medium
+            capitalize
+            transition-all
+            flex items-center gap-2
             ${
               petType === pet
-                ? "bg-blue-600 border-blue-600"
-                : "border-neutral-700 hover:bg-neutral-800"
-            }`}
+                ? "bg-[var(--accent-primary)] border-[var(--accent-primary)] text-white shadow-lg scale-[1.03]"
+                : "bg-[var(--bg-secondary)] border-[var(--border-light)] text-[var(--text-primary)] hover:bg-[var(--accent-secondary)] hover:text-white"
+            }
+          `}
         >
           {pet === "dog" ? "🐶 Dog" : "🐱 Cat"}
         </button>

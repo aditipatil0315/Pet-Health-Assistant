@@ -34,7 +34,6 @@ const ChatContainer = ({ petType, ageGroup }) => {
   const handleSend = (input) => {
     setMessages((prev) => [...prev, { sender: "user", text: input }]);
 
-    // Emergency check
     if (
       input.toLowerCase().includes("seizure") ||
       input.toLowerCase().includes("bleeding")
@@ -52,13 +51,28 @@ const ChatContainer = ({ petType, ageGroup }) => {
   };
 
   return (
-    <div className="bg-neutral-900 rounded-2xl p-4">
+    <div className="
+      w-full 
+      max-w-3xl 
+      mx-auto
+      bg-[var(--bg-primary)]
+      rounded-3xl 
+      p-4 sm:p-6
+      shadow-lg
+      flex 
+      flex-col
+      h-[75vh] sm:h-[80vh]
+    ">
       {alert && <Alert message={alert} />}
 
-      <ChatMessages messages={messages} />
+      <div className="flex-1 overflow-y-auto mb-3">
+        <ChatMessages messages={messages} />
+      </div>
+
       <ChatInput onSend={handleSend} />
     </div>
   );
 };
+
 
 export default ChatContainer;
